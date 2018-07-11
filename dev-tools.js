@@ -17,9 +17,9 @@ var devTools = {
         return output
     },
     binToAscii: function (input, delimiter) {
-        this.output = '',
-        this.delimiter = delimiter;
-        this.delimiter ? input = input.split(this.delimiter) : input = input.match(/.{1,8}/g);
+        output = '',
+        delimiter = delimiter;
+        delimiter ? input = input.split(delimiter) : input = input.match(/.{1,8}/g);
         for ( var i = 0; i < input.length; i++ ) {
             var multiplier = 0,
                 addIt = 0;
@@ -29,23 +29,23 @@ var devTools = {
             }
             singleBin = addIt.split(" ").map(Number);
             singleBin = singleBin.reduce((a, b) => a + b, 0);
-            this.output += (singleBin + ',')
+            output += (singleBin + ',')
         }
-        this.output = this.output.split(',')
-        this.output.pop()
-        this.output = this.output.toString().replace(/,/g,' ')
-        return this.output
+        output = output.split(',')
+        output.pop()
+        output = output.toString().replace(/,/g,' ')
+        return output
     },
     binToText: function(input, delimiter) {
-            this.output = '',
-            this.arr = '',
-            this.delimiter = delimiter;
+            output = '',
+            arr = '',
+            delimiter = delimiter;
 
-        this.delimiter ? this.arr = input.split(this.delimiter) : this.arr = input.match(/.{1,8}/g);
-		for (var i = 0; i < this.arr.length; i++) {
-			this.output += String.fromCharCode(parseInt(this.arr[i], 2).toString(10));
+        delimiter ? arr = input.split(delimiter) : arr = input.match(/.{1,8}/g);
+		for (var i = 0; i < arr.length; i++) {
+			output += String.fromCharCode(parseInt(arr[i], 2).toString(10));
 		}
-		return this.output;
+		return output;
 	}
 }
 

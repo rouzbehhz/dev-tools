@@ -18,7 +18,6 @@ var devTools = {
     },
     binToAscii: function (input, delimiter) {
         output = '',
-        delimiter = delimiter;
         delimiter ? input = input.split(delimiter) : input = input.match(/.{1,8}/g);
         for ( var i = 0; i < input.length; i++ ) {
             var multiplier = 0,
@@ -37,10 +36,8 @@ var devTools = {
         return output
     },
     binToText: function(input, delimiter) {
-            output = '',
-            arr = '',
-            delimiter = delimiter;
-
+        output = '',
+        arr = '',
         delimiter ? arr = input.split(delimiter) : arr = input.match(/.{1,8}/g);
 		for (var i = 0; i < arr.length; i++) {
 			output += String.fromCharCode(parseInt(arr[i], 2).toString(10));

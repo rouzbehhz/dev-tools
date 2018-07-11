@@ -5,39 +5,27 @@ var devTools = {
         for ( var i = 0; i < input.length; i++ ) {
             var singleChar = input[i].charCodeAt(0).toString(2) + ','
             function addZero() {
-                singleChar = 0 + singleChar
-                checkLength();
+                singleChar = 0 + singleChar; checkLength();
             }
             function checkLength() {
-                if ( singleChar.length <= 8 ) {
-                    addZero();
-                }
+                if ( singleChar.length <= 8 ) addZero();
             }
             checkLength()
             output += singleChar
         }
-        output = output.split(',')
-        output.pop()
-        output = output.toString().replace(/,/g,' ')
+        output = output.split(','); output.pop(); output = output.toString().replace(/,/g,' ')
         return output
     },
     binToAscii: function (input, delimiter) {
         this.output = '',
         this.delimiter = delimiter;
-        if ( this.delimiter ) {
-            input = input.split(this.delimiter)
-        }
-        else {
-            input = input.match(/.{1,8}/g);
-        }
+        this.delimiter ? input = input.split(this.delimiter) : input = input.match(/.{1,8}/g);
         for ( var i = 0; i < input.length; i++ ) {
             var multiplier = 0,
                 addIt = 0;
             bin = input[i].split('').reverse()
             for (var o = 0; o < bin.length; o++) {
-                powOf = Math.pow(2, multiplier)
-                addIt += bin[o] * powOf + ' '
-                multiplier++
+                powOf = Math.pow(2, multiplier); addIt += bin[o] * powOf + ' '; multiplier++
             }
             singleBin = addIt.split(" ").map(Number);
             singleBin = singleBin.reduce((a, b) => a + b, 0);
@@ -53,12 +41,7 @@ var devTools = {
             this.arr = '',
             this.delimiter = delimiter;
 
-        if ( this.delimiter ) {
-            this.arr = input.split(this.delimiter);
-        }
-        else {
-            this.arr = input.match(/.{1,8}/g);
-        }
+        this.delimiter ? this.arr = input.split(this.delimiter) : this.arr = input.match(/.{1,8}/g);
 		for (var i = 0; i < this.arr.length; i++) {
 			this.output += String.fromCharCode(parseInt(this.arr[i], 2).toString(10));
 		}

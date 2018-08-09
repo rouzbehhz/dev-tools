@@ -1,50 +1,13 @@
-var devTools = {
-    strToBin: function (input) {
-        var output = '';
-        input = input.split('')
-        for ( var i = 0; i < input.length; i++ ) {
-            var singleChar = input[i].charCodeAt(0).toString(2) + ','
-            function addZero() {
-                singleChar = 0 + singleChar; checkLength();
-            }
-            function checkLength() {
-                if ( singleChar.length <= 8 ) addZero();
-            }
-            checkLength()
-            output += singleChar
-        }
-        output = output.split(','); output.pop(); output = output.toString().replace(/,/g,' ')
-        return output
-    },
-    binToAscii: function (input, delimiter) {
-        output = '',
-        delimiter ? input = input.split(delimiter) : input = input.match(/.{1,8}/g);
-        for ( var i = 0; i < input.length; i++ ) {
-            var multiplier = 0,
-                addIt = 0;
-            bin = input[i].split('').reverse()
-            for (var o = 0; o < bin.length; o++) {
-                powOf = Math.pow(2, multiplier); addIt += bin[o] * powOf + ' '; multiplier++
-            }
-            singleBin = addIt.split(" ").map(Number);
-            singleBin = singleBin.reduce((a, b) => a + b, 0);
-            output += (singleBin + ',')
-        }
-        output = output.split(',')
-        output.pop()
-        output = output.toString().replace(/,/g,' ')
-        return output
-    },
-    binToText: function(input, delimiter) {
-        output = '',
-        arr = '',
-        delimiter ? arr = input.split(delimiter) : arr = input.match(/.{1,8}/g);
-		for (var i = 0; i < arr.length; i++) {
-			output += String.fromCharCode(parseInt(arr[i], 2).toString(10));
-		}
-		return output;
-	}
-}
+const devTools = {
+  strToBin: (srcInput, delimiter = ' ') =>
+    srcInput.split('').map(x => (1e15 + x.charCodeAt(0).toString(2)).slice(-8)).join(delimiter),
+  binToDecimals: (input, delimiter = ' ') =>
+    input.split(delimiter).map(x => parseInt(x, 2)),
+  binToAscii: (input, delimiterInput = ' ', delimiterOutput = ' ') =>
+    devTools.binToDecimals(input, delimiterInput).join(delimiterOutput),
+  binToText: (input, delimiter = ' ') =>
+    devTools.binToDecimals(input, delimiter).map(x => String.fromCharCode(x)).join(''),
+};
 
 ////// Convert some string to binary.
 var someStr = "Convert this into binary!"
